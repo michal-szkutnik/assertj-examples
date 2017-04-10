@@ -65,6 +65,15 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
     // using regex
     assertThat("Frodo").matches("..o.o").doesNotMatch(".*d");
 
+    // using regex - check that a substring matching a pattern exists or doesn't exist
+    assertThat("Jerry Elaine George Kramer")
+                        .containsPattern("Je.{2}y")
+                        .doesNotContainPattern("Newm.n");
+    // you can use precompiled patterns too
+    assertThat("Jerry Elaine George Kramer")
+                        .containsPattern(Pattern.compile("je.{2}y", Pattern.CASE_INSENSITIVE))
+                        .doesNotContainPattern(Pattern.compile("newm.n", Pattern.CASE_INSENSITIVE));
+
     // check for empty string, or not.
     assertThat("").isEmpty();
     assertThat("").isNullOrEmpty();
